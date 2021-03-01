@@ -1,0 +1,72 @@
+                                               Last update: 2020-10-08 16:10 UTC
+How to start a full node in one day from scratch
+
+Since the early beginnings the Bitcoin blockchain was being
+synchronized by starting from the genesis block, downloading and
+verifying all the blocks up till the current time.
+
+Although this approach is impractical for initial blockchain sync
+in 2020 there is a general mistrust or even discouragement of
+distributing the block files otherwise.
+
+Let's have a look at the block files
+
+The block files are located in blocks/blk*.dat^.
+When comparing the SHA256 checksum of any particular blk*.dat
+file on two different systems (full nodes), both synchronized
+from scratch, they may not match.
+
+ ^ see doc/files.md in Bitcoin sources
+
+In order to turn the block files in shape (to comb them) there is
+a tool inside contrib/linearize in Bitcoin's sources. When linearized,
+each blk*.dat file ends up to be the same^ on every system that does
+the linearization and the checksums match.
+
+ ^ note: max_out_sz=134217728 which is 128*1024*1024
+
+    $ cd bitcoin/src
+    bitcoin/src$ grep MAX_BLOCKFILE_SIZE validation.h
+    static const unsigned int MAX_BLOCKFILE_SIZE = 0x8000000; // 128 MiB
+
+
+Thus linearized block files are a good fit to be shared over Torrent
+while retaining their use as Bitcoin's block files without storing
+their content twice (wasting space on HDD or SSD).
+
+Step by step guide
+
+There are multiple different paths to chose from. Both of them lead
+to a full node which ends up to have canonized block files.
+
+  1. Linearize block files of an already synced full node
+  2. Sync a full node over torrent
+
+One more advantage is that there is a signed SHA256SUMS^ file which
+can be used to check all the block files in order to prove their
+authenticity. Such file can be signed by any and all full-node
+owners and provide a trusted way to do the initial sync of the
+blockchain quickly.
+
+    bitcoind -listen=0 -noconnect -disablewallet -reindex -datadir=$PWD
+    -checkblocks=1 -checklevel=0
+    bitcoind -listen=0 -noconnect -disablewallet -datadir=$PWD
+
+Essential reading:
+ - https://learnmeabitcoin.com/
+ - https://bitcointalk.org/index.php?topic=5177528.0
+ - http://rusty.ozlabs.org/
+
+For comparison see:
+ - QuickSync of mynodebtc
+   https://github.com/mynodebtc/mynode.git
+    (rootfs/standard/usr/bin/mynode_quicksync.sh inside the repo)
+   See https://github.com/mynodebtc/mynode/issues/424
+ - A bad example (discontinued)
+   h t t p s : / / g e t b i t c o i n b l o c k c h a i n . c o m
+
+III
+
+I own bitcoin. Only.
+When I write Bitcoin I mean bitcoin.org and bitcoincore.org
+(bitcoin/bitcoin repository on Github).

@@ -1,0 +1,42 @@
+QuickSync is wasting space. Instead of downloading the linearized block
+and undo files in chunks that will be never altered (and can be seeded
+by anyone for years to come) it seeds a compressed file which has no
+generally usable blocks^ (so the seeded data is not of much use to many).
+
+ ^ Torrent meaning of word blocks here
+
+Currently
+[QuickSync](https://github.com/mynodebtc/mynode/blob/master/rootfs/standard/usr/bin/mynode_quicksync.sh)
+downloads a compressed file via torrent, then decompresses it. Random
+data can not be very well compressed.
+
+Take this issue as a request for comments. I want to help.
+
+**Describe the solution you'd like**
+
+I would like the torrent files to contain linearized block files and
+undo files in chunks so the torrents can be seeded forever (as those
+old blocks are never meant to change). The rest (`blocks/index` and
+`chainstate`) can be in one separate torrent.
+
+NOTE: linearized block files —
+such that `max_out_sz=134217728` (which is
+[128\*1024\*1024](https://github.com/bitcoin/bitcoin/blob/master/src/validation.h#L68)),
+the default maximum size of block files in `bitcoind`
+
+See so far a very poorly documented and
+incomplete example at http://217.195.164.4:13744/ (or
+[onion](http://hdn6jnxnlwuiamagueebyahsuw4fprs4knbiw7agsp2inbg6hjxeibyd.onion/))
+— but it works and with the current state you can bring up a node
+which starts syncing and verifying already from summer 2020 and not all
+the way back to the beginning.
+
+There are possibilities to extend all this with signatures of anyone
+(including core developers) so that this way of syncing (up to a buried
+point anyway) is considered right and secure.
+
+**Additional context** Add any other context or screenshots about the
+feature request here.
+
+- [x] Mark this if you searched the existing list of open/closed issue
+  and did not find anything similar
