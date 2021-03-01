@@ -1,7 +1,9 @@
 # Hello World!
 
-Today I found prunednode.today and decided to quickly
-sum up what I did in order to possibly help.
+Today I found [prunednode.today](https://prunednode.today)
+and decided to quickly sum up what I did in in the past
+so that it may possibly help similar efforts and above all
+it will help understanding the topic.
 
 The general idea is that linearized full-node blocks
 (from genesis) are perfectly verifiable. The `rev` files
