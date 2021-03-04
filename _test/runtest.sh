@@ -29,6 +29,7 @@ dotest() {
   rm -rf .[a-z]* *.pid *.log *.dat *.json blocks/index blocks/rev* chainstate
   nohup bitcoind -noconnect -nodebuglogfile \
     -datadir=$PWD -reindex \
+    -logtimestamps=0 \
     -rpcport=0 -listen=0 -disablewallet \
     -persistmempool=0 \
     -checklevel=0 -checkblocks=1 \
@@ -45,6 +46,7 @@ dotest() {
 }
 
 cd $DIR
+bitcoind -version
 test -d blocks || mkdir blocks
 cp $TFILE blocks/blk00000.dat
 dotest

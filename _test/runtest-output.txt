@@ -1,13 +1,24 @@
-/tmp/test-dirsum1: 2020-10-13T13:52:55Z UpdateTip: new best=00000000874690df6c40179f473fbe73aca69963823cc6b886e250bae690466a height=119 version=0x00000001 log2_work=38.906913 tx=120 date='2009-01-11T11:49:17Z' progress=0.000000 cache=0.0MiB(119txo)
-/tmp/test-dirsum2: 2020-10-13T13:52:55Z UpdateTip: new best=00000000874690df6c40179f473fbe73aca69963823cc6b886e250bae690466a height=119 version=0x00000001 log2_work=38.906913 tx=120 date='2009-01-11T11:49:17Z' progress=0.000000 cache=0.0MiB(119txo)
---- /tmp/test-dirsum1	2020-10-13 15:52:55.516792671 +0200
-+++ /tmp/test-dirsum2	2020-10-13 15:52:56.036813399 +0200
+Bitcoin Core version v0.21.0
+Copyright (C) 2009-2020 The Bitcoin Core developers
+
+Please contribute if you find Bitcoin Core useful. Visit
+<https://bitcoincore.org/> for further information about the software.
+The source code is available from <https://github.com/bitcoin/bitcoin>.
+
+This is experimental software.
+Distributed under the MIT software license, see the accompanying file COPYING
+or <https://opensource.org/licenses/MIT>
+
+/tmp/test-dirsum1: UpdateTip: new best=00000000874690df6c40179f473fbe73aca69963823cc6b886e250bae690466a height=119 version=0x00000001 log2_work=38.906913 tx=120 date='2009-01-11T11:49:17Z' progress=0.000000 cache=0.0MiB(119txo)
+/tmp/test-dirsum2: UpdateTip: new best=00000000874690df6c40179f473fbe73aca69963823cc6b886e250bae690466a height=119 version=0x00000001 log2_work=38.906913 tx=120 date='2009-01-11T11:49:17Z' progress=0.000000 cache=0.0MiB(119txo)
+--- /tmp/test-dirsum1	2021-03-04 12:53:47.075195617 +0100
++++ /tmp/test-dirsum2	2021-03-04 12:53:47.599216630 +0100
 @@ -4,7 +4,7 @@
  d41d8cd98f00b204e9800998ecf8427e  ./blocks/index/LOCK
  22bf0e81636b1b45051b138f48b3d148  ./blocks/index/MANIFEST-000002
  0cfc6f5b757b1fa7f24dff88fa280b94  ./blocks/rev00000.dat
--eb3b0bd62bdb28911f8a657ff05511d2  ./chainstate/000003.log
-+3252236c150ea602f33630e8443ea6e0  ./chainstate/000003.log
+-879364dad9d38c5810fd54e15989c053  ./chainstate/000003.log
++64dda9eccef9e43d0992cdbedd7ab8c4  ./chainstate/000003.log
  206702161f94c5cd39fadd03f4014d98  ./chainstate/CURRENT
  d41d8cd98f00b204e9800998ecf8427e  ./chainstate/LOCK
  22bf0e81636b1b45051b138f48b3d148  ./chainstate/MANIFEST-000002
