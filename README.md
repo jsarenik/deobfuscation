@@ -25,7 +25,7 @@ What more, today there are [methods][bt1] to [verify][bt2] the
 These tools are also doing the needed chainstate deobfuscation.
 We will get to that also.
 
-## Pronednode.today
+## Prunednode.today
 
 When this repository was first uploaded to github, I just found
 the [prunednode.today](https://prunednode.today)
