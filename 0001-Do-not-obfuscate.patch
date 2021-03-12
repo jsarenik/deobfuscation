@@ -1,0 +1,93 @@
+From cf92fe96b2eaec856123049cb894c42be38a580b Mon Sep 17 00:00:00 2001
+From: Jan Sarenik <jajomojo@gmail.com>
+Date: Tue, 13 Oct 2020 15:58:33 +0200
+Subject: [PATCH] Do not obfuscate
+
+This is a very poor try to revert the obfuscation.
+
+See 42cb38816 commited in 2015.
+
+It would be much easier to not revert any code, but make a manual
+obfuscation tool which would be able to zero out all obfuscation
+bits of the 64-bit obfuscation value. Just noting this idea in
+text so far, no implementation yet.
+---
+ src/dbwrapper.cpp | 19 +------------------
+ src/dbwrapper.h   |  1 -
+ src/txdb.cpp      |  4 ++--
+ 3 files changed, 3 insertions(+), 21 deletions(-)
+
+diff --git a/src/dbwrapper.cpp b/src/dbwrapper.cpp
+index d7694108f..407cde4e7 100644
+--- a/src/dbwrapper.cpp
++++ b/src/dbwrapper.cpp
+@@ -149,20 +149,6 @@ CDBWrapper::CDBWrapper(const fs::path& path, size_t nCacheSize, bool fMemory, bo
+     // The base-case obfuscation key, which is a noop.
+     obfuscate_key = std::vector<unsigned char>(OBFUSCATE_KEY_NUM_BYTES, '\000');
+ 
+-    bool key_exists = Read(OBFUSCATE_KEY_KEY, obfuscate_key);
+-
+-    if (!key_exists && obfuscate && IsEmpty()) {
+-        // Initialize non-degenerate obfuscation if it won't upset
+-        // existing, non-obfuscated data.
+-        std::vector<unsigned char> new_key = CreateObfuscateKey();
+-
+-        // Write `new_key` so we don't obfuscate the key with itself
+-        Write(OBFUSCATE_KEY_KEY, new_key);
+-        obfuscate_key = new_key;
+-
+-        LogPrintf("Wrote new obfuscate key for %s: %s\n", path.string(), HexStr(obfuscate_key));
+-    }
+-
+     LogPrintf("Using obfuscation key for %s: %s\n", path.string(), HexStr(obfuscate_key));
+ }
+ 
+@@ -220,10 +206,7 @@ const unsigned int CDBWrapper::OBFUSCATE_KEY_NUM_BYTES = 8;
+  */
+ std::vector<unsigned char> CDBWrapper::CreateObfuscateKey() const
+ {
+-    unsigned char buff[OBFUSCATE_KEY_NUM_BYTES];
+-    GetRandBytes(buff, OBFUSCATE_KEY_NUM_BYTES);
+-    return std::vector<unsigned char>(&buff[0], &buff[OBFUSCATE_KEY_NUM_BYTES]);
+-
++    return std::vector<unsigned char>(OBFUSCATE_KEY_NUM_BYTES, '\000');
+ }
+ 
+ bool CDBWrapper::IsEmpty()
+diff --git a/src/dbwrapper.h b/src/dbwrapper.h
+index c119036db..c78835510 100644
+--- a/src/dbwrapper.h
++++ b/src/dbwrapper.h
+@@ -245,7 +245,6 @@ public:
+         }
+         try {
+             CDataStream ssValue(MakeUCharSpan(strValue), SER_DISK, CLIENT_VERSION);
+-            ssValue.Xor(obfuscate_key);
+             ssValue >> value;
+         } catch (const std::exception&) {
+             return false;
+diff --git a/src/txdb.cpp b/src/txdb.cpp
+index 4b4766e1b..c83b9fe8a 100644
+--- a/src/txdb.cpp
++++ b/src/txdb.cpp
+@@ -41,7 +41,7 @@ struct CoinEntry {
+ }
+ 
+ CCoinsViewDB::CCoinsViewDB(fs::path ldb_path, size_t nCacheSize, bool fMemory, bool fWipe) :
+-    m_db(MakeUnique<CDBWrapper>(ldb_path, nCacheSize, fMemory, fWipe, true)),
++    m_db(MakeUnique<CDBWrapper>(ldb_path, nCacheSize, fMemory, fWipe, false)),
+     m_ldb_path(ldb_path),
+     m_is_memory(fMemory) { }
+ 
+@@ -54,7 +54,7 @@ void CCoinsViewDB::ResizeCache(size_t new_cache_size)
+         // filesystem lock.
+         m_db.reset();
+         m_db = MakeUnique<CDBWrapper>(
+-            m_ldb_path, new_cache_size, m_is_memory, /*fWipe*/ false, /*obfuscate*/ true);
++            m_ldb_path, new_cache_size, m_is_memory, /*fWipe*/ false, /*obfuscate*/ false);
+     }
+ }
+ 
+-- 
+2.25.1
+
