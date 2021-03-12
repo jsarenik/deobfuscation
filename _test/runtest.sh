@@ -43,6 +43,12 @@ dotest() {
   wait $PID
   rm -rf .cookie .lock *.pid *.log *.dat *.json
   dirsum > $OUT
+  # following uses chainstate from https://github.com/mycroft/chainstate.git
+  # tested with bitcoind 0.21.0
+  type chainstate && {
+    ln -s chainstate state
+    chainstate | sha256sum >> $OUT
+  }
 }
 
 cd $DIR
