@@ -10,15 +10,31 @@ Distributed under the MIT software license, see the accompanying file COPYING
 or <https://opensource.org/licenses/MIT>
 
 /tmp/test-dirsum1: UpdateTip: new best=00000000874690df6c40179f473fbe73aca69963823cc6b886e250bae690466a height=119 version=0x00000001 log2_work=38.906913 tx=120 date='2009-01-11T11:49:17Z' progress=0.000000 cache=0.0MiB(119txo)
+chainstate is /home/nsm/bin/chainstate
+using obfuscation key 6a49cd9ecd881baf
+Record type 14 is not handled.
+Index: 0e006f62667573636174655f6b6579
+Value: 086a49cd9ecd881baf
+
+last block: af1b88cd198bd9b5c35b9f52d9f2f71903bd11ae1cf18fd229f9d877785d0f00
+
 /tmp/test-dirsum2: UpdateTip: new best=00000000874690df6c40179f473fbe73aca69963823cc6b886e250bae690466a height=119 version=0x00000001 log2_work=38.906913 tx=120 date='2009-01-11T11:49:17Z' progress=0.000000 cache=0.0MiB(119txo)
---- /tmp/test-dirsum1	2021-03-04 12:53:47.075195617 +0100
-+++ /tmp/test-dirsum2	2021-03-04 12:53:47.599216630 +0100
+chainstate is a tracked alias for /home/nsm/bin/chainstate
+using obfuscation key c62e109f3bbcd67a
+Record type 14 is not handled.
+Index: 0e006f62667573636174655f6b6579
+Value: 08c62e109f3bbcd67a
+
+last block: 7ad6bc3b1856be191696aba4d82f90b5d67025581d2ce87efc34ec81798068ac
+
+--- /tmp/test-dirsum1	2021-03-12 14:20:07.201894925 +0100
++++ /tmp/test-dirsum2	2021-03-12 14:20:09.033968122 +0100
 @@ -4,7 +4,7 @@
  d41d8cd98f00b204e9800998ecf8427e  ./blocks/index/LOCK
  22bf0e81636b1b45051b138f48b3d148  ./blocks/index/MANIFEST-000002
  0cfc6f5b757b1fa7f24dff88fa280b94  ./blocks/rev00000.dat
--879364dad9d38c5810fd54e15989c053  ./chainstate/000003.log
-+64dda9eccef9e43d0992cdbedd7ab8c4  ./chainstate/000003.log
+-7f0cd67ae2d0218e956c70b96995b8b7  ./chainstate/000003.log
++10ac00f581ddfe3772adac69cf6e20c4  ./chainstate/000003.log
  206702161f94c5cd39fadd03f4014d98  ./chainstate/CURRENT
  d41d8cd98f00b204e9800998ecf8427e  ./chainstate/LOCK
  22bf0e81636b1b45051b138f48b3d148  ./chainstate/MANIFEST-000002
