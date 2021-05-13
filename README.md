@@ -25,7 +25,8 @@ What more, today there are [methods][bt1] to [verify][bt2] the
 These tools are also doing the needed chainstate deobfuscation.
 We will get to that also.
 
-See also [UTXO snapshots PR](https://github.com/bitcoin/bitcoin/pull/15606).
+See also [UTXO snapshots PR](https://github.com/bitcoin/bitcoin/pull/15606)
+and [Assume UTXO project](https://github.com/bitcoin/bitcoin/projects/11).
 
 ## Prunednode.today
 
