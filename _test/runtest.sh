@@ -3,6 +3,7 @@
 # Changelog:
 #  - 2020-10-14 initial version
 #  - 2020-10-15 added -rpcport and all options that follow it to bitcoind
+#  - see git log for more
 
 export LC_ALL=C
 export LANG=C
