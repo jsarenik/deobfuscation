@@ -7,7 +7,7 @@
 bettermagnet() {
   line=$(transmission-show -m $1)
   printf '<a href="'$line
-  echo "&tr=wss%3A%2F%2Ftracker.btorrent.xyz&tr=wss%3A%2F%2Ftracker.openwebtorrent.com\">$1</a>"
+  echo "&tr=wss%3A%2F%2Ftracker.btorrent.xyz&tr=wss%3A%2F%2Ftracker.openwebtorrent.com&tr=wss%3A%2F%2Ftracker.bublina.eu.org\">$1</a>"
 }
 
 cat <<EOF
@@ -22,7 +22,7 @@ EOF
 
 i=0
 echo "<ul>"
-for file in bitcoin-torrent-*.torrent; do
+for file in snapshot*.torrent; do
   echo "    <li>$(bettermagnet $file)</li>"
 done
 echo "</ul>"
